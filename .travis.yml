@@ -11,7 +11,18 @@ before_install:
          brew tap caskroom/cask;
          brew install Caskroom/cask/java;
      fi
+   - if [ "$TRAVIS_OS_NAME" == "linux" ] && [ "$JVM" == "latest" ]; then
+         sudo apt-get update -qq;
+         sudo /bin/echo -e oracle-java9-installer shared/accepted-oracle-license-v1-1 select true | sudo debconf-set-selections;
+         sudo apt-get install -y oracle-java9-installer;
+         sudo apt-get install -y oracle-java9-unlimited-jce-policy;
+         sudo update-java-alternatives -s java-9-oracle;
+     fi
+   - if [ "$TRAVIS_JDK_VERSION" == oraclejdk9 ]; then
+         sudo rm /etc/mavenrc;
+     fi
    - echo $JAVA_HOME
+   - echo $TRAVIS_JDK_VERSION
 # requires sudo   
 #  - java -Xshare:dump
 
@@ -42,7 +53,20 @@ matrix:
     - os: linux
       jdk: openjdk7
     - os: linux
+      jdk: openjdk8
+      sudo: required
+      dist: trusty
+      group: edge
+    - os: linux
       jdk: oraclejdk8
+    - os: linux
+      # needs to be manually installed
+      # see: https://github.com/travis-ci/travis-ci/issues/2968#issuecomment-149164058
+      jdk: oraclejdk9
+      #env: JVM=latest
+      sudo: required
+      dist: trusty
+      group: edge
     - os: osx
       env: JVM=latest
 # these are the current Travis default JDKs on linux/osx
@@ -51,8 +75,10 @@ matrix:
 #    - os: osx
 #      env: JAVA_HOME=/usr/libexec/java_home
   allow_failures:
-#   - env: JVM=latest
-    - os: osx
+   - os: osx
+  #- jdk: oraclejdk9
+   - jdk: openjdk8
+   - env: JVM=latest
 
 cache:
   brew: true
