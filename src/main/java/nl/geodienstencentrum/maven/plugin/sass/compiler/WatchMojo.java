@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2015 Mark Prins, GeoDienstenCentrum.
+ * Copyright 2014-2016 Mark Prins, GeoDienstenCentrum.
  * Copyright 2010-2014 Jasig.
  *
  * See the NOTICE file distributed with this work for additional information
@@ -43,6 +43,7 @@ public class WatchMojo extends AbstractSassMojo {
 	 * @throws MojoFailureException when the Sass compilation fails
 	 * @see org.apache.maven.plugin.Mojo#execute()
 	 */
+    @Override
 	public void execute() throws MojoExecutionException, MojoFailureException {
 		if (this.isSkip()) {
 			return;

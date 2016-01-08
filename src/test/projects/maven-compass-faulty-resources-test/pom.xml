@@ -69,7 +69,6 @@
 						<style>:compressed</style>
 						<debug_info>false</debug_info>
 					</sassOptions>
-					<rubyVersion>2.0</rubyVersion>
 				</configuration>
 			</plugin>
 			<plugin>

@@ -56,26 +56,6 @@ public class SCSSLintReportMojo extends AbstractMavenReport {
 	private Map<String, String> sassOptions;
 
 	/**
-	 * ignored for linting, compass is not used.
-	 *
-	 * @since 2.0
-	 * @deprecated Compass support will be removed in 3.0
-	 */
-	@Deprecated
-	@Parameter(defaultValue = "false")
-	private boolean useCompass;
-
-	/**
-	 * ignored for linting, compass is not used.
-	 *
-	 * @since 2.5
-	 * @deprecated Compass support will be removed in 3.0
-	 */
-	@Deprecated
-	@Parameter
-	private File compassConfigFile;
-
-	/**
 	 * Directory containing Sass files, defaults to the Maven Web application
 	 * sources directory (${basedir}/src/main/sass).
 	 *

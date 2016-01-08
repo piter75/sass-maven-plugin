@@ -1,7 +1,7 @@
 ## About Sass Compiler Plugin
 
 A Maven Plugin that compiles [Sass](http://sass-lang.com/) files, optionally 
-using the [Compass](http://compass-style.org/) or [Bourbon](http://bourbon.io) framework.
+using the [Bourbon](http://bourbon.io) framework.
 
 
 ## Usage

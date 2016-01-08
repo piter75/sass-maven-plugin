@@ -43,7 +43,6 @@
 					</execution>
 				</executions>
 				<configuration>
-					<useCompass>true</useCompass>
 					<sassOptions>
 						<always_update>true</always_update>
 						<style>:expanded</style>

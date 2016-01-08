@@ -40,7 +40,6 @@
 						<style>${sass.OutputStyle}</style>
 						<debug_info>${debug}</debug_info>
 					</sassOptions>
-					<useCompass>true</useCompass>
 					<resources>
 						<resource>
 							<source>

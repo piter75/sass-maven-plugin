@@ -147,25 +147,14 @@ public abstract class AbstractSassMojo extends AbstractMojo {
 	private String[] gemPaths = new String[0];
 
 	/**
-	 * Defines gems to be loaded before Sass/Compass. This is useful to add gems
-	 * with custom Sass functions or stylesheets. Gems that hook into Compass
-	 * are transparently added to Sass' load_path.
+	 * Defines gems to be loaded before Sass. This is useful to add gems
+	 * with
+     * custom Sass functions or stylesheets. Gems that hook into Sass	 * are transparently added to Sass' load_path.
 	 *
 	 * @since 2.0
 	 */
 	@Parameter
 	private String[] gems = new String[0];
-
-	/**
-	 * Enable the use of Compass style library mixins.
-	 *
-	 * @since 2.0
-	 * 
-	 * @deprecated Compass support will be removed in 3.0
-	 */
-	@Deprecated
-	@Parameter(defaultValue = "false")
-	private boolean useCompass;
 
 	/**
 	 * Enable the use of Bourbon style library mixins.
@@ -174,17 +163,6 @@ public abstract class AbstractSassMojo extends AbstractMojo {
 	 */
 	@Parameter(defaultValue = "false")
 	private boolean useBourbon;
-
-	/**
-	 * specify an optional compass configuration file, eg. {@code compass.rb}
-	 *
-	 * @since 2.5
-	 * 
-	 * @deprecated Compass support will be removed in 3.0
-	 */
-	@Deprecated
-	@Parameter(property = "compassConfigFile")
-	private File compassConfigFile;
 
 	/**
 	 * Directory containing Sass files, defaults to the Maven
@@ -224,18 +202,6 @@ public abstract class AbstractSassMojo extends AbstractMojo {
 	 */
 	@Parameter(defaultValue = "..")
 	private String relativeOutputDirectory;
-
-	/**
-	 * Ruby version to use. Valid versions depend on the currently embedded
-	 * JRuby runtime. For JRuby 1.7.x this is {@code 1.8}, {@code 1.9}
-	 * <em>(default)</em> or {@code 2.0} <em>(experimental)</em>.
-	 *
-	 * @deprecated ignored, since JRuby 9000 / v2.9 this is no longer supported
-	 * @since 2.1
-	 */
-	@Deprecated
-	@Parameter(defaultValue = "2.1")
-	private Float rubyVersion;
 
 	/**
 	 * skip execution.
@@ -316,24 +282,6 @@ public abstract class AbstractSassMojo extends AbstractMojo {
 		sassScript.append("require 'sass/plugin'\n");
 		sassScript.append("require 'java'\n");
 
-		if (this.useCompass) {
-			log.info("Running with Compass enabled.");
-			log.warn("Compass support is deprecated, it will be removed in version 3.0, see https://github.com/GeoDienstenCentrum/sass-maven-plugin/issues/77");
-			sassScript.append("require 'compass'\n");
-			sassScript.append("require 'compass/exec'\n");
-			sassScript.append("require 'compass/core'\n");
-			sassScript.append("require 'compass/import-once'\n");
-			if (compassConfigFile != null) {
-				sassScript.append("Compass.add_project_configuration '")
-				        .append(compassConfigFile.getAbsolutePath())
-				        .append("'\n");
-			} else {
-				sassScript.append("Compass.add_project_configuration \n");
-			}
-			this.sassOptions.put("load_paths",
-			        "Compass.configuration.sass_load_paths");
-		}
-
 		// Get all template locations from resources and set option
 		// 'template_location' and
 		// 'css_location' (to override default "./public/stylesheets/sass",
@@ -409,11 +357,6 @@ public abstract class AbstractSassMojo extends AbstractMojo {
 		if (log.isDebugEnabled()) {
 			sassScript.append("require 'pp'\n");
 			sassScript.append("pp Sass::Plugin.options\n");
-			if (this.useCompass) {
-				sassScript.append("pp Compass.base_directory\n");
-				sassScript.append("pp Compass::Core.base_directory\n");
-				sassScript.append("pp Compass::configuration\n");
-			}
 		}
 	}
 
@@ -524,17 +467,6 @@ public abstract class AbstractSassMojo extends AbstractMojo {
 	 */
 	protected List<Resource> getResources() {
 		return this.resources;
-	}
-
-	/**
-	 * Compass enabled accessor.
-	 * @return the useCompass
-	 * 
-	 * @deprecated Compass support will be removed in 3.0
-	 */
-	@Deprecated
-	protected boolean isUseCompass() {
-		return this.useCompass;
 	}
 
 	/**

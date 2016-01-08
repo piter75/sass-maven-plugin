@@ -42,7 +42,6 @@
 					</execution>
 				</executions>
 				<configuration>
-					<useCompass>true</useCompass>
 					<destination>${basedir}/target/css</destination>
 					<sassOptions>
 						<always_update>true</always_update>
@@ -50,7 +49,6 @@
 						<debug_info>false</debug_info>
 						<sourcemap>:none</sourcemap>
 					</sassOptions>
-					<rubyVersion>2.0</rubyVersion>
 				</configuration>
 			</plugin>
 		</plugins>

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Mark Prins, GeoDienstenCentrum
+ * Copyright 2015-2016 Mark Prins, GeoDienstenCentrum
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,6 @@ package nl.geodienstencentrum.maven.plugin.sass.compiler;
 import com.google.common.base.Stopwatch;
 import java.io.File;
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
-import nl.geodienstencentrum.maven.plugin.sass.compiler.UpdateStylesheetsMojo;
 import org.apache.maven.plugin.testing.MojoRule;
 import org.apache.maven.plugin.testing.resources.TestResources;
 import static org.junit.Assume.assumeNotNull;
@@ -28,9 +27,9 @@ import org.junit.Rule;
 import org.junit.Test;
 
 /**
- * benchmark sass/compass compilation.
+ * benchmark sass compilation.
  *
- * @author Mark Prins <mark@b3partners.nl>
+ * @author Mark Prins
  */
 public class CompilerBenchmarkTest {
 

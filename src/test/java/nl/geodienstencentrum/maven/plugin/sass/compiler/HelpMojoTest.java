@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Mark Prins, GeoDienstenCentrum
+ * Copyright 2015-2016 Mark Prins, GeoDienstenCentrum
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -56,7 +56,7 @@ public class HelpMojoTest {
 	 */
 	@Test
 	public void testExecute() throws Exception {
-		final File projectCopy = this.resources.getBasedir("maven-compass-test");
+        final File projectCopy = this.resources.getBasedir("maven-sass-test");
 		final File pom = new File(projectCopy, "pom.xml");
 		assumeNotNull("POM file should not be null.", pom);
 		assumeTrue("POM file should exist as file.",pom.exists() && pom.isFile());

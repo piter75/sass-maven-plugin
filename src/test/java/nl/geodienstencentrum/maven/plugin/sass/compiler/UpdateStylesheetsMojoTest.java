@@ -151,7 +151,7 @@ public class UpdateStylesheetsMojoTest {
 
 	@Test
 	public void testCompassConfigFile() throws Exception {
-		final File projectCopy = this.resources.getBasedir("maven-compass-configuration-file-test");
+        final File projectCopy = this.resources.getBasedir("maven-sass-syntax-test");
 		final File pom = new File(projectCopy, "pom.xml");
 		assertTrue("The POM file should exist as a file", pom.exists() && pom.isFile());
 

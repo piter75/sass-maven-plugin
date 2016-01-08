@@ -42,8 +42,6 @@
 					</execution>
 				</executions>
 				<configuration>
-					<compassConfigFile>${basedir}/src/main/resources/compass.rb</compassConfigFile>
-					<useCompass>true</useCompass>
 					<destination>${basedir}/target/css</destination>
 					<sassOptions>
 						<always_update>true</always_update>
@@ -52,7 +50,6 @@
 						<cache>false</cache>
 						<sourcemap>false</sourcemap>
 					</sassOptions>
-					<rubyVersion>2.0</rubyVersion>
 				</configuration>
 			</plugin>
 		</plugins>

@@ -42,14 +42,12 @@
 					</execution>
 				</executions>
 				<configuration>
-					<useCompass>true</useCompass>
 					<destination>${basedir}/target/css</destination>
 					<sassOptions>
 						<always_update>true</always_update>
 						<style>:expanded</style>
 						<debug_info>false</debug_info>
 					</sassOptions>
-					<rubyVersion>2.0</rubyVersion>
 				</configuration>
 			</plugin>
 		</plugins>

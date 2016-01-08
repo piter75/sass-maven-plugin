@@ -7,7 +7,7 @@
 			<answer>
 				<p>This is due to the way path information is passed to Compass, either change 
 					your OS or move on to use directories without an Umlaut.</p>
-				<p>A branch isslustrating this behaviour is available in the 
+                    <p>A branch illustrating this behaviour is available in the
 				<a href ="https://github.com/GeoDienstenCentrum/sass-maven-plugin/tree/umlaut-directory">
 					umlaut-directory</a> branch.</p>
 				<p>For all the details see <a href="https://github.com/GeoDienstenCentrum/sass-maven-plugin/issues/79">issue #79</a></p>
