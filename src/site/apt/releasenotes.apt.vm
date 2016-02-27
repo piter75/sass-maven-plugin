@@ -51,7 +51,7 @@ ${project.name} ${project.version} Release Notes
 ~~  * Update Bourbon to version ${project.properties.get("bourbon.version")}, please check the
 ~~    {{{https://github.com/thoughtbot/bourbon/releases}Bourbon changelog}}
 
-~~  * Update JRuby to ${project.properties.get("jruby.version")}
+  * Update JRuby to ${project.properties.get("jruby.version")}
 
 ~~  * Update Compass to version ${project.properties.get("compass.version")}
 
@@ -60,8 +60,8 @@ ${project.name} ${project.version} Release Notes
 
 * 2.16 Release Notes
 
-  This release features Compass version 1.0.3, Bourbon version 4.2.6 and Sass version 3.4.21 
-  running on JRuby 9.0.5.0. 
+  This release features Compass version 1.0.3, Bourbon version 4.2.6 and Sass version 3.4.21
+  running on JRuby 9.0.5.0.
 
   A complete list of issues can be seen in the tracker
   {{{${project.issueManagement.url}?q=milestone%3A$2.15+is%3Aclosed}milestone 2.16}}.
@@ -70,13 +70,13 @@ ${project.name} ${project.version} Release Notes
 
   * Update SCSS-Lint to version 0.45.0, please check
     the {{{https://github.com/brigade/scss-lint/blob/master/CHANGELOG.md}SCSS-Lint changelog}}
-  
+
   * Update JRuby to 9.0.5.0
 
   * various plugin updates
 
   []
-  
+
 
 * 2.15 Release Notes
 
