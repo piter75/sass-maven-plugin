@@ -23,6 +23,9 @@ import static org.apache.maven.plugins.annotations.LifecyclePhase.PROCESS_SOURCE
 import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
+import java.util.Iterator;
+import java.util.Map;
+
 import nl.geodienstencentrum.maven.plugin.sass.AbstractSassMojo;
 import org.apache.commons.io.DirectoryWalker;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -86,15 +89,27 @@ public class UpdateStylesheetsMojo extends AbstractSassMojo {
 			return true;
 		}
 
-		final LastModifiedWalker sourceWalker =
-		        new LastModifiedWalker(getSassSourceDirectory());
-		final LastModifiedWalker targetWalker = new LastModifiedWalker(destination);
-		// If either directory is empty, we do a build to make sure
-		if (sourceWalker.getCount() == 0 || targetWalker.getCount() == 0) {
-			return true;
+		boolean buildRequired = false;
+
+		Iterator<Map.Entry<String, String>> templateLocations = getTemplateLocations();
+		while (templateLocations.hasNext()) {
+			Map.Entry<String, String> locationsEntry = templateLocations.next();
+
+			final LastModifiedWalker sourceWalker =
+					new LastModifiedWalker(new File(locationsEntry.getKey()));
+			final LastModifiedWalker targetWalker =
+					new LastModifiedWalker(new File(locationsEntry.getValue()));
+
+			// If either directory is empty, we do a build to make sure
+			buildRequired |= sourceWalker.getCount() == 0 || targetWalker.getCount() == 0;
+
+			// We check the youngest files only if build is not required yet
+			if (!buildRequired) {
+				buildRequired = sourceWalker.getYoungest() > targetWalker.getYoungest();
+			}
 		}
 
-		return sourceWalker.getYoungest() > targetWalker.getYoungest();
+		return buildRequired;
 	}
 
 	/**
@@ -130,15 +145,32 @@ public class UpdateStylesheetsMojo extends AbstractSassMojo {
 		 * {@inheritDoc}
 		 */
 		@Override
+		protected void handleDirectoryStart(File directory, int depth, Collection<Void> results) throws IOException {
+			updateTimestamps(directory);
+			super.handleDirectoryStart(directory, depth, results);
+		}
+
+		/**
+		 * {@inheritDoc}
+		 */
+		@Override
 		protected void handleFile(final File file, final int depth,
 		        final Collection<Void> results) throws IOException {
+			updateTimestamps(file);
+			count++;
+			super.handleFile(file, depth, results);
+		}
+
+		/**
+		 * Updates min and max timestamp, if necessary, according to current file / directory value
+		 * @param file The file or directory for which the timestamp should by processed
+         */
+		private void updateTimestamps(File file) {
 			long lastMod = file.lastModified();
 			// CHECKSTYLE:OFF:AvoidInlineConditionals
 			youngest = (youngest == null ? lastMod : Math.max(youngest, lastMod));
 			oldest = (oldest == null ? lastMod : Math.min(oldest, lastMod));
 			// CHECKSTYLE:ON
-			count++;
-			super.handleFile(file, depth, results);
 		}
 
 		/**

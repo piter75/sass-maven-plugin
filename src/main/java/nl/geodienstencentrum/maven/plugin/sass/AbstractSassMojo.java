@@ -426,7 +426,7 @@ public abstract class AbstractSassMojo extends AbstractMojo {
 	 *
 	 * @return the template locations
 	 */
-	private Iterator<Entry<String, String>> getTemplateLocations() {
+	protected Iterator<Entry<String, String>> getTemplateLocations() {
 		final Log log = this.getLog();
 		List<Resource> resList = this.resources;
 
