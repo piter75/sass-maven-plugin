@@ -80,6 +80,9 @@ public class UpdateStylesheetsMojo extends AbstractSassMojo {
 	/**
 	 * Returns true if a build is required.
 	 *
+	 * The build is required if any of the destination directories
+	 * does not exist or has older newest timestamp than corresponding source.
+	 *
 	 * @return true if a build is required
 	 * @throws IOException if one occurs checking the files and directories
 	 */
